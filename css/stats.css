@@ -1,0 +1,58 @@
+/* © 2014 MLG */
+@import url('mlg.css');
+
+body {padding: 2ex}
+input[type=number] {width: 7ex}
+#cabecalho {height: 40px;background: none; }
+#container {top: 40px;}
+div#resultados {
+    font-weight: bold;
+    padding-left: 3em;
+    top: 200px;
+}
+sub {text-transform: lowercase}
+input[type=range] {
+    vertical-align: middle;
+    margin: auto 1ex;
+}
+div#formulario {left:160px}
+#formulario label:not(.normal) {
+    width:55%;
+    display:inline-block;
+}
+#formulario fieldset div {
+    max-height: 386px;
+    overflow-y: auto
+}
+#formulario table td {text-align: right}
+table#resultados_discretos caption {
+    height: 14px;
+    border-radius: 3px;
+}
+table#resultados_discretos td.titulo {
+    width: 250px;
+    vertical-align: top;
+    font: normal normal 14px Schoolbell;
+}
+table#resultados_discretos td.titulo+td {
+    font-family: Inconsolata;
+}
+.grouped_res {
+    float: right;
+    width: 25%;
+    position: absolute;
+    top: 48px;
+    right: 1ex;
+    float: right;
+}
+div.grouped_res ul {
+    color: #333;
+    background: transparent;
+    list-style: none;
+}
+div.grouped_res ul li>span {
+    font-weight: bold;
+    float:right;
+    margin-right:1ex;
+    margin-left: 2ex;
+}
