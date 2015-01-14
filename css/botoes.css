@@ -1,0 +1,114 @@
+/*  Código adaptado de:
+    http://www.zurb.com/blog_uploads/0000/0617/buttons-03.html
+*/
+
+/*  Definição básica dos botões */
+input[type=button], input[type=button]:visited,
+input[type=submit], input[type=submit]:visited,
+input[type=reset],  input[type=reset]:visited,
+.btn, .btn:visited,
+button, button:visited,
+.button, .button:visited {
+	background: #222 repeat-x;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	border-radius: 2px 8px / 2px 10px;
+	border: 0;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	color: #fff;
+	cursor: pointer!important;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 1em;
+	padding: 5px 10px 7px;
+	position: relative;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+}
+
+.gStyle, a.gStyle:active {
+	background: linear-gradient(top, #fff, #ddd);
+	background: white url(imagens/gButton_bg.png) 0 0 repeat-x;
+/*	background-size: auto 101%;*/
+	border-radius: 3px;
+	border: 1px solid #bbb;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	color: black!important;
+	margin-right: 3px;
+	padding: 2px 4px;
+	text-shadow: 0 -1px -1px rgba(0,0,0,0.5),1px 1px 0 white;
+}
+a.gStyle:visited {color:#333!important}
+a.gStyle:hover, .gStyle:hover {
+	background: white url(imagens/gButton_hover.png) repeat-x;
+	background: linear-gradient(top, #ddd, #fff);
+	color: red!important;
+	cursor:	pointer;
+}
+/*    Aqua buttons. (c) GirlieMac blogger    */
+.aqua {
+	width: auto;
+	height: 2em;
+	padding: 0 1em 3px 1em;
+	margin: 0;
+	background: #cde;
+	border: 2px solid #ccc;
+	border-color: #8ba2c1 #5890bf #4f93ca #768fa5;
+	font: 600 1em/1 Lucida Sans, Verdana, sans-serif;
+	color: #fff;
+	text-shadow: rgba(10, 10, 10, 0.5) 1px 2px 2px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 1.5em; -moz-border-radius: 1.5em;
+	box-shadow: 0 10px 16px rgba(66, 140, 240, 0.5), inset 0 -8px 12px 0 #6bf, inset 0 -8px 0 8px #48c, inset 0 -35px 15px -10px #7ad;
+}
+.aqua:hover {
+	margin-top: 2px 0 -2px 0;
+	text-shadow: rgb(255, 255, 255) 0px 0px 5px;
+	box-shadow: 0 5px 8px rgba(66, 140, 240, 0.5), inset 0 -8px 12px 0 #6bf, inset 0 -8px 0 8px #48c, inset 0 -35px 15px -10px #7ad;
+}
+
+input[type=button]:active, input[type=submit]:active,
+input[type=reset]:active, button:active,
+.button:active {top: 1px;box-shadow: inset;}
+
+/*  Efeito para o _hover_ cor preta  */
+input[type=button]:hover, input[type=submit]:hover,
+input[type=reset]:hover, button:hover,
+.button:hover {
+	background-color: #111;
+	color: #fff;
+}
+
+/*  Tamanho texto botão pequeno */
+.small, .small:visited	{
+	font-size: 11px;
+	padding: 3px 7px;
+}
+.medium,.medium:visited	{
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1em;
+}
+.large, .large:visited	{font-size: 14px; padding: 8px 14px 9px;}
+
+/*  Cores   */
+.green, .green:visited		{background-color: #91bd09;}
+.green:hover				{background-color: #749a02;}
+.blue, .blue:visited		{
+	background: #433C85 url(../img/bntBg.gif) repeat;
+	background-image: linear-gradient(top, #3b3e63, #4A5280 45%, #4A5280 55%, #3b3e63);
+}
+a.button,a.button:visited,a.button:active {
+	color: white!important;
+}
+.blue:hover					{background: #4A5280 url();}/*#203080*/
+.cyan:hover					{background-color: #007d9a;}
+.cyan, .cyan:visited		{background-color: #1A99B2;}
+.magenta:hover				{background-color: #630030;}
+.magenta, .magenta:visited	{background-color: #a9014b;}
+.orange:hover				{background-color: #C05530;}/* #d45500  */
+.orange, .orange:visited	{background-color: #ff5c00;}
+.red:hover					{background-color: #872300;}
+.red, .red:visited			{background-color: #e33100;}
+.yellow:hover				{background-color: #fc9200;}
+.yellow, .yellow:visited	{background-color: #ffb515;}
