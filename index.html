@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author"   content="Manuel López">
+    <meta name="editor"   content="ViM Editor">
+    <title>Estatística Aplicada - ADS III Noturno</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/stats.js"></script>
+    <link href="css/stats.css" rel="stylesheet">
+</head>
+<body>
+    <div id="cabecalho">
+        <img src="media/logo_cooltext.png" style="float:right" id="logo" alt="LOGO">
+    </div>
+    <div class="laterais">
+        <div id="abas">
+            <span id="aba_mi" alt="Manual Input" class="items"><img src="media/database_edit.png"  alt="" width="16" height="16" />Entrada de dados</span>
+            <span id="aba_tb" alt="Tabbed Input" class="items"><img src="media/database_table.png" alt="" width="16" height="16" />Dados Agrupados</span>
+            <span id="aba_cl"                    class="items"><img src="media/table_sort.png"     alt="" width="16" height="16" />Dados em Classe</span>
+            <span id="aba_dv"                    class="items"><img src="media/sigma.png"  alt="" width="16" height="16" />Divisibilidade</span>
+        </div>
+    </div>
+    <div id="container">
+        <div id="formulario">
+            <div id="mi" class="on">
+                <form action="" id="frm_mi" name="frm_mi" method="post">
+                    <fieldset>
+                        <legend>Entrada Manual</legend>
+                        <label for="raw_data" class="normal">Dados da Distribuição (dados discretos)</label>
+                        <textarea id="raw_data" name="manual_data" cols="48" tabindex="1" rows="5"
+                            placeholder="Digite ou cole os dados aqui"></textarea>
+                        <input type="hidden" name="data_type" value="discrete" />
+                        <button type="button" class="small orange excluir"  onClick="clearRawData()">Limpar</button>
+                        <button type="button" class="small magenta" onClick="$('#raw_data').keyup();">Calcular</button>
+                        <button type="button" class="small cyan" name="classes" id="classify">Classes</button>
+                        <button type="button" class="small blue" name="agrupar" id="agrupar">Agrupar</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="tb">
+                <form action="" id="frm_tb" name="frm_tb" method="post">
+                    <fieldset>
+                        <legend>Dados da Distribuição - Dados agrupados</legend>
+                        <button id="add_grouped_row" type="button" class="small cyan"
+                             title="Adiciona uma nova linha"><img src="media/db_add.png" height="16" /></button>
+                        <button id="pop_grouped_row" type="button" class="small orange excluir"
+                             title="Exclui a última linha linha"><img src="media/db_remove.png" height="16" /></button>
+                        <div id="tabbeddata">
+                            <table id="grouped_input">
+                                <thead>
+                                    <tr>
+                                        <th>Variável</th>
+                                        <th>Frequência (F<sub>i</sub>)</th>
+                                        <th>Freq. %</th>
+                                        <th>F<sub>ac</sub></th>
+                                        <th>X<sub>i</sub>×F<sub>i</sub></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="xi"></td>
+                                        <td class="fi"></td>
+                                        <td class="fr   locked">&nbsp;</td>
+                                        <td class="fac  locked">&nbsp;</td>
+                                        <td class="xifi locked">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th><span style="float:left;font-size:1.1em">Soma</span> &sigma;</th>
+                                        <th class="fi"></th>
+                                        <th class="fr   dir locked">&nbsp;</th>
+                                        <th class="fac  dir locked">&nbsp;</th>
+                                        <th class="xifi dir locked">&nbsp;</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <button type="button" class="blue small"
+                             onClick="reCalcTabbedTable();">Calcular</button>
+                         <button type='button' class='red small excluir'
+                             onclick='clearTabbedTable()'>Limpar</button>
+                        <div class="grouped_res">
+                            <ul>
+                                <li><u style="text-decoration:overline">X</u><span id="gr_mean_res"></span></li>
+                                <li>M<sub>e</sub><span id="gr_median_res"></span></li>
+                                <li>M<sub>o</sub><span id="gr_moda_res"></span></li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div id='cl'>
+                <form action="" id="frm_cl" name="frm_cl" method="post">
+                    <fieldset>
+                        <legend>Dados da Distribuição - Dados em classe</legend>
+                        <button id="add_class_row" type="button" class="small cyan"
+                             title="Adiciona uma nova linha"><img src="media/db_add.png" height="16" /></button>
+                        <button id="pop_class_row" type="button" class="small orange excluir"
+                             title="Exclui a última linha linha"><img src="media/db_remove.png" height="16" /></button>
+                        <div id="classed_data">
+                            <table id="classes_input">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Classes</th>
+                                        <th rowspan="2">Frequência (F<sub>i</sub>)</th>
+                                        <th rowspan="2">Freq. %</th>
+                                        <th rowspan="2">F<sub>ac</sub></th>
+                                        <th rowspan="2">X<sub>i</sub></th>
+                                        <th rowspan="2">X<sub>i</sub>×F<sub>i</sub></th>
+                                        <tr>
+                                            <th title='Limite inferior da classe'>L<sub>i</sub></th>
+                                            <th title='Limite superior da classe'>L<sub>s</sub></th>
+                                        </tr>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="li"></td>
+                                        <td class="ls"></td>
+                                        <td class="fi"></td>
+                                        <td class="fr   locked">&nbsp;</td>
+                                        <td class="fac  locked">&nbsp;</td>
+                                        <td class="xi   locked">&nbsp;</td>
+                                        <td class="xifi locked">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2"><span style="float:left;font-size:1.1em">Soma</span> &sigma;</th>
+                                        <th class="fi"></th>
+                                        <th class="locked fr">&nbsp;</th>
+                                        <th class="locked">&nbsp;</th>
+                                        <th class="locked">&nbsp;</th>
+                                        <th class="locked xifi">&nbsp;</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <button type="button" class="blue small"
+                             onClick="reCalcClassedTable();">Calcular</button>
+                         <button type='button' class='red small excluir'
+                             onclick='clearClassedTable()'>Limpar</button>
+                        <div class="grouped_res">
+                            <ul>
+                                <li><u style="text-decoration:overline">X</u><span id="cl_mean_res"></span></li>
+                                <li>M<sub>e</sub><span id="cl_median_res"></span></li>
+                                <li>M<sub>o</sub><span id="cl_moda_res"></span></li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="dv">
+                <form id="frm_dv" action="" name="frm_dv">
+                    <fieldset style="min-width:280px;width:90%;max-width:360px">
+                        <legend>Calcula Medidas de Divisibilidade</legend>
+                        <a href=""></a>
+                        <label for="N">Nº de Elementos:</label>
+                        <input type="number" id="N" min=1 name="N" value />
+                        <br />
+                        <label class="normal" for="divisao">
+                            Selecione o tipo de divisão (<span id="range-val">1</span>):
+                        </label>
+                        <br />
+                        <strong>1</strong>
+                        <input id="i" min="1" max="1" type="range" name="i" value />
+                        <strong id="range-max">2</strong>&nbsp;&nbsp;
+                        <select id="divisao" name="Div">
+                            <option value="2">Mediana</option>
+                            <option selected=true value="4">Quartil</option>
+                            <option value="10">Decil</option>
+                            <option value="100">Percentil</option>
+                        </select>
+                        <br />
+                        <br />
+                        <div id="vp">
+                            Procurar o valor 
+                            <span style="font-size:1.1em;color: darkred" id="valor_procurar">--</span> na coluna da 
+                            <abbr title="Frequência Acumulada">F<sub>ac</sub></abbr>.
+                        </div>
+                        <br />
+                        <br />
+                        <label for="li">Limite Inferior (L<sub>i</sub>):</label>
+                        <input type="number" id="li" name="li" value /><br />
+                        <label for="C">Comprimento da Classe:</label>
+                        <input type="number" id="C" name="C" value /><br />
+                        <label for="FDi">Frequência da Classe I:</label>
+                        <input type="number" id="FDi" name="FDi" value /><br />
+                        <label for="faca">Valor da <abbr title="Frequência Acumulada Anterior">F<sub>aca</sub></abbr>:</label>
+                        <input type="number" id="faca" name="faca" value /><br />
+                        <button type="button" class="blue small"   onclick="calcular(this.form);">Calcular</button>
+                        <button type="reset"  class="orange small" onclick="this.form.reset()">Limpar</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div id="resultados">
+            <table id="resultados_discretos">
+                <caption>Medidas de Tendência Central para a distribuição digitada</caption>
+                <thead>
+                    <tr class="titulo">
+                        <th style='width:250px'>Medida</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr style="font-weight:bold">
+                    <td class="titulo">Média
+                        <span style="text-decoration:overline;font-weight:bold;float:right">X</span>
+                    </td>
+                    <td id="mean_result"></td>
+                </tr>
+                <tr>
+                    <td class="titulo">
+                        Mediana
+                        <span style="font-weight:bold;float:right">Me</span>
+                    </td>
+                    <td id="median_result"></td>
+                </tr>
+                <tr>
+                    <td class="titulo">
+                        Moda
+                        <span style="font-weight:bold;float:right">Mo</span>
+                    </td>
+                    <td id="moda_result"></td>
+                </tr>
+                <tr>
+                    <td class="titulo">Núm. Elementos
+                        <span style="font-weight:bold;float:right">N</span>
+                        </td>
+                    <td id="n_value"></td>
+                </tr>
+                <tr>
+                    <td class="titulo">Amplitude da Distribuição
+                        <span style="font-weight:bold;float:right">C</span>
+                    </td>
+                    <td id="c_value"></td>
+                </tr>
+                <tr>
+                    <td class="titulo">(Apenas para distribuições não agrupadas)
+                        <span style="font-weight:bold;float:right">Rol</span>
+                    </td>
+                    <td id="rol_distr"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="msg_box" class='popup'>
+    </div>
+	<div id="copy" style="position:fixed;bottom:0;right:1ex;text-align:right;text-shadow:0 0 3px white;color:white">&copy; 2014 - Manuel López Grijalva</div>
+</body>
+</html>
