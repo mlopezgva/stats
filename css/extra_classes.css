@@ -1,0 +1,100 @@
+/* CSS Document
+ * define classes genéricas para um layout mais simples...
+ * Author: Manuel López <manolo@telecontrol.com.br>
+ */
+
+/* cores */
+.azul		{color: #383a60!important}
+.vermelho	{color: #d50202!important}
+.verde		{color: #008000!important}
+.amarelo    {color: #FFFF00!important}
+.cinza      {color: #808080!important}
+/*  Estilos */
+.italic, .italico, .italica, .cursiva {font-style: italic!important;}
+.bold, .negrito {font-weight: bold!important;}
+.sublinhado {text-decoration: underline!important;}
+.sombra, .tshadow {text-shadow: 2px 2px 3px grey;}
+
+/*	Text case	*/
+.MAYS {text-transform: uppercase;}
+.mins {text-transform: lowercase;}
+.versalita {font-variant: small-caps;}
+
+/*  Alinhamentos    */
+.left	 {text-align:left!important}
+.center	 {text-align:center!important}
+.right	 {text-align:right!important}
+.vtop    {vertical-align:top!important}
+.vmiddle {vertical-align:middle!important}
+.vbottom {vertical-align:bottom!important}
+.oculto  {display:none!important}
+
+/*  Posicionamento  */
+.flutua_dir, .right_float	{float: right!important}
+.flutua_esq, .left_float	{float: left!important}
+.rel, .relative, .relativo	{position: relative!important}
+.abs, .absoluto, .absolute	{position:absolute!important}
+.fixo, .fixed, .fijo, .fija {position: fixed!important}
+.acima, .arriba {top: 3px!important}
+.direita, .derecha {right: 3px!important}
+.embaixo, .abajo, .bottom {bottom: 3px!important}
+.esquerda, .izquierda {left: 3px!important}
+
+/*  Drop-Shadow */
+.box-shadow, .shadow, .bshadow {
+	box-shadow: 2px 2px 4px #aaa;
+	-moz-box-shadow: 2px 2px 4px #aaa;
+}
+
+/*   Rounded corners via CSS3   */
+.rc, .rc-all {  /* São dois nomes para a class para ter uma alternativa caso esqueça (all, tr,tl...) */
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+.rc-top {
+	border-radius: 8px 8px 0 0;
+	-moz-border-radius: 8px 8px 0 0;
+}
+
+.rc-bottom {
+	border-radius: 0 0 8px 8px;
+	-moz-border-radius: 0 0 8px 8px;
+}
+
+.rc-left {
+	border-radius: 8px 0 0 8px;
+	-moz-border-radius: 8px 0 0 8px;
+}
+
+.rc-right {
+	border-radius: 0 8px 8px 0;
+	-moz-border-radius: 0 8px 8px 0;
+}
+
+.rc-tl, .rc-topleft {
+	border-radius: 8px 0 0 0;
+	-moz-border-radius-topleft: 8px;
+}
+
+.rc-tr, rc-topright {
+	border-radius: 0 8px 0 0;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-right-radius: 8px;
+}
+
+.rc-bl, rc-bottomleft {
+	border-radius: 0 0 0 8px;
+	border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+}
+
+.rc-br, rc-bottomright {
+	border-radius: 0 0 8px 0;
+	-moz-border-radius-bottomright: 8px;
+}
+.rc-tc, .tc-rc {    /* Stands for 'TeleControl Rounded Corners' */
+	border-radius: 0 8px 0 8px;
+	-moz-border-radius: 0 8px 0 8px;
+} 
